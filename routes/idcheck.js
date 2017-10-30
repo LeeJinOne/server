@@ -29,10 +29,12 @@ router.get('/', function(req, res, next) {
             if(!err) {
                 // 입력한 정보가 있다면
                 if (rows.length > 0){
+                    console.log("ID check fail");
                     var login = {result:'fail', msg:'Sorry, This ID is already used'}
                     res.send(login);
                     // 입력한 정보가 맞지 않거나 없다면
                 } else {
+                    console.log("ID check success");
                     var error = {result:'success', msg:'Good, You can use this ID'}
                     res.send(error);
                 }

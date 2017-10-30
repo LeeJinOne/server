@@ -23,31 +23,23 @@ router.get('/', function(req, res, next) {
     connection.connect();
 
     // 연결한 mysql 서버에 쿼리문(INSERT) 전송
-    connection.query("INSERT INTO users VALUES" +
-        " id='"+queryData.id+"'" +
-        " and pwd='"+queryData.pwd+"' " +
-        " and name='"+queryData.name+"'" +
-        " and number='"+queryData.number+"'" +
-        " and con='"+queryData.con+"'" +
-        " and date='"+queryData.date+"'",
+    connection.query("INSERT INTO users VALUES(" +
+        " '"+queryData.id+"'" + // id
+        " ,'"+queryData.pwd+"' " + // pwd
+        " ,'"+queryData.name+"'" + // name
+        " ,'"+queryData.number+"'" + // number
+        " ,"+queryData.con+"" + // con
+        " ,"+queryData.date+")", // date
         function (err, rows, fields) {
-            // 에러가 없다면
+            // 에러가 없다면 가입 성공
             if(!err) {
-                // 입력한 정보가 있다면
-                if (rows.length > 0){
-                    console.log("sign up success");
-                    var login = {result:'success', msg:'Thanks, login info is correct'}
-                    res.send(login);
-                    // 입력한 정보가 맞지 않거나 없다면
-                } else {
-                    console.log("sign up fail");
-                    var error = {result:'fail', msg:'user is not valid'}
-                    res.send(error);
-                }
-                // 에러 발생시
+                console.log(queryData.id + "sign up success");
+                var join = {result:'success', msg:'Welcome to being our family!!'}
+                res.send(join);
+            // 에러 발생시, 가입 실패
             } else {
-                console.log("error occurred")
-                var error = {msg:'error cannot execute query'}
+                console.log(err);
+                var error = {result:'fail', msg:'sign up failed'}
                 res.send(error);
             }
         });
