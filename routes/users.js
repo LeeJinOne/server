@@ -26,11 +26,11 @@ router.get('/', function(req, res, next) {
       if(!err) {
           // 입력한 정보가 있다면
           if (rows.length > 0){
-              var login = {msg:'Thanks, login info is correct'}
+              var login = {result:'success', msg:'Thanks, login info is correct'}
               res.send(login);
           // 입력한 정보가 맞지 않거나 없다면
           } else {
-              var error = {msg:'user is not valid'}
+              var error = {result:'fail', msg:'user is not valid'}
               res.send(error);
           }
       // 에러 발생시
