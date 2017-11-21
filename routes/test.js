@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
     connection.connect();
 
     // 연결한 mysql 서버에 쿼리문 전송
-    connection.query("SELECT * FROM test",
+    connection.query("SELECT * FROM `test`",
         function (err, rows, fields) {
             // 에러가 없다면
             if(!err) {
